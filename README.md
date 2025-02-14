@@ -18,7 +18,7 @@ This plugin connects your Eliza agent to Messari's comprehensive AI-powered APIs
 ## Installation
 
 ```bash
-pnpm add @elizaos/plugin-messari-ai-toolkit
+pnpm add @elizaos-plugins/plugin-messari-ai-toolkit
 ```
 
 ## Configuration
