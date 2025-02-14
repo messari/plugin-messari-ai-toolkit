@@ -23,7 +23,29 @@ pnpm add @elizaos/plugin-messari-ai-toolkit
 
 ## Configuration
 
-To use this plugin, you'll need a Messari API key. 
+To use this plugin, you'll need a Messari API key. The Messari AI Toolkit is an enterprise product that requires:
+
+1. An Enterprise (ENT) subscription
+2. Purchase of the AI Toolkit service package + credits
+3. API key generation
+
+### Enterprise Access
+
+The AI Toolkit subscription includes access to Messari's base package:
+- Asset API
+- News API
+- Marketdata API
+
+### Getting an API Key
+
+1. Subscribe to Messari Enterprise
+2. Purchase the AI Toolkit package
+3. Visit [Messari Account Settings](https://messari.io/account/api) to generate your API key
+4. Use the API key in your configuration
+
+### API Endpoints
+
+The Toolkit endpoints are accessible at `api.messari.io/ai`. For detailed API documentation, visit the [Messari Developer Docs](https://docs.messari.io/reference/chat-completion).
 
 ## Usage
 
