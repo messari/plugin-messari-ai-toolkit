@@ -1,108 +1,76 @@
-# @elizaos/plugin-messari-copilot
+# @elizaos/plugin-messari-ai-toolkit
 
-A plugin that integrates Messari's AI Copilot capabilities into ElizaOS agents, providing market research and crypto data analysis functionality.
+A powerful Eliza OS plugin that integrates Messari's AI Toolkit to provide advanced crypto market research capabilities to your Eliza agent.
 
-## Description
+## Overview
 
-The Messari Copilot plugin enables agents to answer questions about cryptocurrency markets, protocols, and on-chain data by leveraging Messari's AI-powered API. It automatically detects research questions in conversations and provides detailed, data-driven responses.
+This plugin connects your Eliza agent to Messari's comprehensive AI-powered APIs, enabling sophisticated crypto research and market analysis capabilities. It intelligently detects and processes research questions from conversations, leveraging Messari's proprietary data and expertise.
+
+## Features
+
+- Seamless integration with Messari's AI-Toolkit `/chat/completions` API
+- Intelligent detection of crypto-related research questions
+- Real-time market data and asset metrics analysis
+- Access to consolidated news summarizations
+- Asset due diligence insights
+- Fundraising and investment data visualization capabilities
 
 ## Installation
 
 ```bash
-pnpm install @elizaos/plugin-messari-copilot
+pnpm add @elizaos/plugin-messari-ai-toolkit
 ```
 
 ## Configuration
 
-The plugin requires a Messari API key to function. Set it in your environment variables:
-
-```bash
-export MESSARI_API_KEY=your_api_key_here
-```
-
-Or add it to your `.env` file:
-
-```
-MESSARI_API_KEY=your_api_key_here
-```
-
-## Features
-
-### Research Question Detection
-
-- Automatically identifies questions about:
-    - Market data and statistics
-    - Rankings and comparisons
-    - Historical data and trends
-    - Protocol and token analysis
-    - Financial performance metrics
-
-### Intelligent Response Generation
-
-- Processes natural language queries
-- Provides data-driven answers
-- Handles multiple question types
-- Maintains conversation context
+To use this plugin, you'll need a Messari API key. 
 
 ## Usage
 
-The plugin works automatically once installed and configured. It will:
+1. Import and register the plugin with your Eliza agent
+2. Configure your API key
+3. Start asking crypto-related questions!
 
-1. Monitor conversations for research questions
-2. Process relevant messages through Messari's AI
-3. Return detailed, data-backed responses
+The plugin will automatically detect relevant research questions and query Messari's AI Toolkit for comprehensive answers.
 
-Example questions it can handle:
+## About Messari AI Toolkit
 
-- "What are the top 10 L2s by fees?"
-- "Show me ETH price"
-- "What's the TVL of Arbitrum?"
+Messari's AI Toolkit is an enterprise-grade suite of AI-powered APIs designed specifically for the crypto ecosystem. It provides:
 
-## Development
+- Crypto-aware completions endpoint (OpenAI-compatible)
+- Asset extraction on arbitrary documents
+- Direct access to underlying agents
+- News recaps and summarizations
+- Deep understanding of crypto-specific terminology and context
+- Real-time market data analysis
 
-1. Clone the repository
-2. Install dependencies:
+## Use Cases
 
-```bash
-pnpm install
-```
+- Market trend analysis with real-time data
+- Automated crypto research and report generation
+- News summarization across multiple sources
+- Asset due diligence with Enterprise Diligence Reports
+- Fundraising and investment data visualization
+- Asset extraction and classification for document contextualization
 
-3. Build the plugin:
+## Security
 
-```bash
-pnpm run build
-```
+This plugin requires secure handling of Messari API keys. Never expose your API key in your code or version control system.
 
-4. Run linting:
+## Performance Considerations
 
-```bash
-pnpm run lint
-```
-
-## Dependencies
-
-- @elizaos/core: workspace:\*
-
-## Error Handling
-
-The plugin includes robust error handling for:
-
-- Missing API keys
-- API rate limits
-- Network failures
-- Invalid responses
-
-All errors are properly logged for debugging.
+The plugin may introduce additional latency due to API calls. Consider implementing appropriate caching and error handling strategies in production environments.
 
 ## Contributing
 
-Contributions are welcome! Please ensure your pull requests:
-
-1. Include appropriate tests
-2. Update documentation
-3. Follow the existing code style
-4. Handle errors appropriately
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This plugin is part of the Eliza project. See the main project repository for license information.
+MIT
+
+## Support
+
+For questions about API access and testing, contact bijan.massoumi@messari.io.
+
+For technical support with the plugin, please open an issue in the repository.
