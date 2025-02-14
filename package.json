@@ -14,15 +14,23 @@
             }
         }
     },
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "require": "./dist/index.js"
+        }
+    },
     "files": [
-        "dist"
+        "dist",
+        "src"
     ],
     "dependencies": {
-        "tsup": "8.3.5"
+        "tsup": "8.3.5",
+        "@elizaos/core": "^0.1.9"
     },
     "peerDependencies": {
-        "whatwg-url": "7.1.0",
-        "@elizaos/core": "^0.25.6-alpha.1"
+        "whatwg-url": "7.1.0"
     },
     "scripts": {
         "build": "tsup --format esm --dts",
