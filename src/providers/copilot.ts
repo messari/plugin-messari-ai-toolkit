@@ -1,33 +1,33 @@
 import {
-    AgentRuntime as IAgentRuntime,
-    composeContext,
-    ModelClass,
-    elizaLogger,
-    generateText,
+  AgentRuntime as IAgentRuntime,
+  composeContext,
+  ModelClass,
+  elizaLogger,
+  generateText,
 } from "@elizaos/core";
 import type { Memory, Provider, State } from "@elizaos/core";
 
 // Configuration constants
 const CONFIG = {
-    RECENT_MESSAGES_COUNT: 5,
-    API_ENDPOINT: "https://api.messari.io/ai/v1/chat/completions",
-    ENV_API_KEY: "MESSARI_API_KEY",
+  RECENT_MESSAGES_COUNT: 5,
+  API_ENDPOINT: "https://api.messari.io/ai/v1/chat/completions",
+  ENV_API_KEY: "MESSARI_API_KEY",
 } as const;
 
 // Types for API responses and errors
 interface MessariAPIResponse {
-    data: {
-        messages: Array<{
-            content: string;
-            role: string;
-        }>;
-    };
+  data: {
+    messages: Array<{
+      content: string;
+      role: string;
+    }>;
+  };
 }
 
 interface MessariError extends Error {
-    status?: number;
-    statusText?: string;
-    responseText?: string;
+  status?: number;
+  statusText?: string;
+  responseText?: string;
 }
 
 // Template for question generation
@@ -66,47 +66,47 @@ Examples:
  * @returns The API response content or null if there's an error
  */
 async function callMessariAPI(
-    apiKey: string,
-    question: string
+  apiKey: string,
+  question: string
 ): Promise<string | null> {
-    try {
-        const response = await fetch(CONFIG.API_ENDPOINT, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "x-messari-api-key": apiKey,
-            },
-            body: JSON.stringify({
-                messages: [
-                    {
-                        role: "user",
-                        content: question,
-                    },
-                ],
-            }),
-        });
+  try {
+    const response = await fetch(CONFIG.API_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-messari-api-key": apiKey,
+      },
+      body: JSON.stringify({
+        messages: [
+          {
+            role: "user",
+            content: question,
+          },
+        ],
+      }),
+    });
 
-        if (!response.ok) {
-            const responseText = await response.text();
-            const error = new Error() as MessariError;
-            error.status = response.status;
-            error.statusText = response.statusText;
-            error.responseText = responseText;
-            throw error;
-        }
-
-        const data = (await response.json()) as MessariAPIResponse;
-        return data.data.messages[0].content;
-    } catch (error) {
-        const err = error as MessariError;
-        elizaLogger.error("Error calling Messari API:", {
-            status: err.status,
-            statusText: err.statusText,
-            responseText: err.responseText,
-            message: err.message,
-        });
-        return null;
+    if (!response.ok) {
+      const responseText = await response.text();
+      const error = new Error() as MessariError;
+      error.status = response.status;
+      error.statusText = response.statusText;
+      error.responseText = responseText;
+      throw error;
     }
+
+    const data = (await response.json()) as MessariAPIResponse;
+    return data.data.messages[0].content;
+  } catch (error) {
+    const err = error as MessariError;
+    elizaLogger.error("Error calling Messari API:", {
+      status: err.status,
+      statusText: err.statusText,
+      responseText: err.responseText,
+      message: err.message,
+    });
+    return null;
+  }
 }
 
 /**
@@ -115,53 +115,51 @@ async function callMessariAPI(
  * @returns A string of recent messages
  */
 function getRecentMessages(state?: State): string {
-    return (
-        state?.recentMessagesData
-            ?.slice(-CONFIG.RECENT_MESSAGES_COUNT)
-            .map((m) => m.content.text)
-            .join("\n") || ""
-    );
+  return (
+    state?.recentMessagesData
+      ?.slice(-CONFIG.RECENT_MESSAGES_COUNT)
+      .map((m) => m.content.text)
+      .join("\n") || ""
+  );
 }
 
 const copilotProvider: Provider = {
-    get: async (runtime: IAgentRuntime, message: Memory, state?: State) => {
-        const apiKey = process.env[CONFIG.ENV_API_KEY];
-        if (!apiKey) {
-            elizaLogger.error(
-                "Messari API key not found in environment variables"
-            );
-            return null;
-        }
+  get: async (runtime: IAgentRuntime, message: Memory, state?: State) => {
+    const apiKey = runtime.getSetting(CONFIG.ENV_API_KEY);
+    if (!apiKey) {
+      elizaLogger.error("Messari API key not found in runtime settings");
+      return null;
+    }
 
-        const contextState = {
-            ...state,
-            currentMessage: message.content.text,
-            recentMessages: getRecentMessages(state),
-        };
-        const questionContext = composeContext({
-            state: contextState,
-            template: COPILOT_QUESTION_TEMPLATE,
-        });
+    const contextState = {
+      ...state,
+      currentMessage: message.content.text,
+      recentMessages: getRecentMessages(state),
+    };
+    const questionContext = composeContext({
+      state: contextState,
+      template: COPILOT_QUESTION_TEMPLATE,
+    });
 
-        elizaLogger.debug("Generated question context", {
-            context: questionContext,
-        });
+    elizaLogger.debug("Generated question context", {
+      context: questionContext,
+    });
 
-        const copilotQuestion = await generateText({
-            runtime,
-            context: questionContext,
-            modelClass: ModelClass.MEDIUM,
-        });
-        if (copilotQuestion === "NONE") {
-            elizaLogger.info("No research questions identified in the message");
-            return null;
-        }
+    const copilotQuestion = await generateText({
+      runtime,
+      context: questionContext,
+      modelClass: ModelClass.MEDIUM,
+    });
+    if (copilotQuestion === "NONE") {
+      elizaLogger.info("No research questions identified in the message");
+      return null;
+    }
 
-        elizaLogger.info("Processing research question", {
-            question: copilotQuestion,
-        });
-        return await callMessariAPI(apiKey, copilotQuestion);
-    },
+    elizaLogger.info("Processing research question", {
+      question: copilotQuestion,
+    });
+    return await callMessariAPI(apiKey, copilotQuestion);
+  },
 };
 
 export { copilotProvider };

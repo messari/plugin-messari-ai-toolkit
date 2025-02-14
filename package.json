@@ -1,10 +1,19 @@
 {
-    "name": "@elizaos/plugin-messari-ai-toolkit",
-    "version": "0.1.1",
+    "name": "@elizaos-plugins/plugin-messari-ai-toolkit",
+    "version": "0.0.1",
     "type": "module",
     "main": "dist/index.js",
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
+    "agentConfig": {
+        "pluginType": "elizaos:plugin:1.0.0",
+        "pluginParameters": {
+            "MESSARI_API_KEY": {
+                "type": "string",
+                "description": "API key for accessing Messari's AI Toolkit services"
+            }
+        }
+    },
     "exports": {
         "./package.json": "./package.json",
         ".": {
