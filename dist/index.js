@@ -133,9 +133,8 @@ var messariPlugin = {
   actions: [],
   providers: [copilotProvider]
 };
-var index_default = messariPlugin;
 export {
-  index_default as default,
+  messariPlugin,
   providers_exports as providers
 };
 //# sourceMappingURL=index.js.map

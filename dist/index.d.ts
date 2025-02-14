@@ -15,4 +15,4 @@ declare const messariPlugin: {
     providers: _elizaos_core.Provider[];
 };
 
-export { messariPlugin as default, index as providers };
+export { messariPlugin, index as providers };
