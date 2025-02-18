@@ -30,7 +30,7 @@
     },
     "peerDependencies": {
         "whatwg-url": "7.1.0",
-        "@elizaos/core": "^0.1.9"
+        "@elizaos/core": ">=0.1.9"
     },
     "peerDependenciesMeta": {
         "@elizaos/core": {
