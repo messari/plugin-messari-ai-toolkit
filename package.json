@@ -26,11 +26,19 @@
         "src"
     ],
     "dependencies": {
-        "tsup": "8.3.5",
-        "@elizaos/core": "^0.1.9"
+        "tsup": "8.3.5"
     },
     "peerDependencies": {
-        "whatwg-url": "7.1.0"
+        "whatwg-url": "7.1.0",
+        "@elizaos/core": "^0.1.9"
+    },
+    "peerDependenciesMeta": {
+        "@elizaos/core": {
+            "optional": false
+        },
+        "whatwg-url": {
+            "optional": true
+        }
     },
     "scripts": {
         "build": "tsup --format esm --dts",
