@@ -1,4 +1,4 @@
-import { copilotProvider } from "./providers/copilot.ts";
+import { copilotProvider } from "./providers/messari/index.ts";
 
 export * as providers from "./providers";
 

@@ -1,1 +1,1 @@
-export * from "./copilot.ts";
+export { copilotProvider } from "./messari";
