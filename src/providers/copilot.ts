@@ -96,7 +96,11 @@ async function callMessariAPI(
     }
 
     const data = (await response.json()) as MessariAPIResponse;
-    return data.data.messages[0].content;
+    const res = data.data.messages[0].content;
+    elizaLogger.debug("Messari API response", {
+      response: res,
+    });
+    return res;
   } catch (error) {
     const err = error as MessariError;
     elizaLogger.error("Error calling Messari API:", {

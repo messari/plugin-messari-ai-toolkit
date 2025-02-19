@@ -69,7 +69,11 @@ async function callMessariAPI(apiKey, question) {
       throw error;
     }
     const data = await response.json();
-    return data.data.messages[0].content;
+    const res = data.data.messages[0].content;
+    elizaLogger.debug("Messari API response", {
+      response: res
+    });
+    return res;
   } catch (error) {
     const err = error;
     elizaLogger.error("Error calling Messari API:", {
