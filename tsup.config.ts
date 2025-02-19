@@ -7,5 +7,5 @@ export default defineConfig({
   clean: true,
   dts: true,
   format: ["esm"],
-  external: ["@elizaos/core", "fs", "path", "https", "http"],
+  external: ["fs", "path", "https", "http"],
 });
