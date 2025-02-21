@@ -6,6 +6,10 @@ A powerful Eliza OS plugin that integrates Messari's AI Toolkit to provide advan
 
 This plugin connects your Eliza agent to Messari's comprehensive AI-powered APIs, enabling sophisticated crypto research and market analysis capabilities. It intelligently detects and processes research questions from conversations, leveraging Messari's proprietary data and expertise.
 
+## Demo
+
+https://raw.githubusercontent.com/elizaos-plugins/plugin-messari-ai-toolkit/main/.github/assets/demo.mp4
+
 ## Features
 
 - Seamless integration with Messari's AI-Toolkit `/chat/completions` API
