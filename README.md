@@ -8,7 +8,7 @@ This plugin connects your Eliza agent to Messari's comprehensive AI-powered APIs
 
 ## Demo
 
-https://raw.githubusercontent.com/elizaos-plugins/plugin-messari-ai-toolkit/main/.github/assets/demo.mp4
+https://github.com/messari/plugin-messari-ai-toolkit/blob/master/.github/assets/eliza-tutorial.mp4
 
 ## Features
 
